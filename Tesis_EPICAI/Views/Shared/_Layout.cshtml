@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
-
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 </head>
 <body>
     <header>
@@ -27,11 +29,31 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Trabajadors" asp-action="Index">Trabajadores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Create">Usuarios</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
                         </li>
                     </ul>
                 </div>
             </div>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="container">
+                    <ul class="navbar-nav ml-auto align-items-end">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Usuarios" asp-action="Login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="container">
+                    <ul class="navbar-nav ml-auto ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Usuarios" asp-action="Logout">Salir @User.Identity.Name</a>
+                        </li>
+                    </ul>
+                </div>
+            }
         </nav>
     </header>
     <div class="container">
@@ -45,20 +67,17 @@
             &copy; 2021 - EPICAI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/select2/js/select2.js"></script>
 
-    @*<script src="~/select2-4.0.13/js/select2.js"></script>*@
-    @*<script>
-            $(".select2").select2({
-                theme : "boostrap4"
-            })
-                //$(".select2").select2({
-                //    theme: "bootstrap4"
-                //})
-        </script>*@
+    <script src="~/select2-4.0.13/js/select2.js"></script>
+    <script>
+        $(".select2").select2({
+            theme: "boostrap4"
+        })
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

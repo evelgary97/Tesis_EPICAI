@@ -20,7 +20,7 @@ namespace Tesis_EPICAI.Models
 
         [Required(ErrorMessage = "Rellene el campo carnet de identidad")]
         [Display(Name = "Carnet de identidad")]
-        [RegularExpression("[0-9]{11}")]
+        [RegularExpression("[0-9]{11}", ErrorMessage = "El carnet de identidad debe contener solo 11 dígitos")]
         public string Ci { get; set; }
 
         [DataType(DataType.PhoneNumber)]
@@ -31,7 +31,9 @@ namespace Tesis_EPICAI.Models
         [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
-        [Required] 
-        public Cargo Cargo { get; set; }
+        [Required]
+        public int CargoId { get; set; }
+
+        public virtual Cargo Cargo { get; set; }
     }
 }

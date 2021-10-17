@@ -1,0 +1,33 @@
+﻿@model List<Tesis_EPICAI.ViewModels.Usuarios.UserWithRole>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+<h1>Lista de usuarios</h1>
+<a asp-action="Create" class="btn btn-primary mb-5">Crear</a>
+<table class="table table-striped text-center">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.User</td>
+                <td>@user.Role</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-secondary">Eliminar</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

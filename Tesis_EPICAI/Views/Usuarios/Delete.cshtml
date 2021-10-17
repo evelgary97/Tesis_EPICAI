@@ -1,0 +1,22 @@
+﻿@model Tesis_EPICAI.ViewModels.Usuarios.Delete
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Borrar Usuario";
+}
+
+<h1>Desea eliminar el usuario?</h1>
+
+<form method="post" >
+    <div class="form-group">
+        <label asp-for="Nombre" class="col-form-label"></label>
+        <input asp-for="Nombre" class="form-control" disabled="disabled" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Rol" class="col-form-label"></label>
+        <input asp-for="Rol" class="form-control" disabled="disabled" />
+    </div>
+    <button asp-action="Deleted" class="btn btn-primary" asp-route-Id="@Model.Id">Eliminar</button>
+    <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+</form>

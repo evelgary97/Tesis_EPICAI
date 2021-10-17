@@ -29,7 +29,7 @@ namespace Tesis_EPICAI
             services.AddIdentity<IdentityUser, IdentityRole>(x =>
             {
                 x.Password.RequireDigit = false;
-                x.Password.RequiredLength = 4;
+                x.Password.RequiredLength = 3;
                 x.Password.RequireLowercase = false;
                 x.Password.RequireNonAlphanumeric = false;
                 x.Password.RequireUppercase = false;

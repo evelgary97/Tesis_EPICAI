@@ -22,7 +22,7 @@ namespace Tesis_EPICAI.Controllers
         // GET: Trabajadors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Trabajador.ToListAsync());
+            return View(await _context.Trabajador.Include(c => c.Cargo).ToListAsync());
         }
 
         // GET: Trabajadors/Details/5
@@ -51,7 +51,7 @@ namespace Tesis_EPICAI.Controllers
             {
                 ListItems = new List<SelectListItem>()
             };
-            model.ListItems = _context.Cargo.Select(c => new SelectListItem(c.Nombre, c.Nombre)).ToList();
+            model.ListItems = _context.Cargo.Select(c => new SelectListItem(c.Nombre, c.Id.ToString())).ToList();
 
             return View(model);
         }
@@ -65,15 +65,13 @@ namespace Tesis_EPICAI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var idCargo = model.Cargo.Id;
-
                 var trabajador = new Trabajador
                 {
                     Nombre = model.Nombre,
                     Ci = model.Ci,
                     Direccion = model.Direccion,
                     NumeroTelefono = model.NumeroTelefono,
-                    Cargo = model.Cargo
+                    CargoId = model.CargoId
                 };
                 _context.Add(trabajador);
                 await _context.SaveChangesAsync();
@@ -90,7 +88,6 @@ namespace Tesis_EPICAI.Controllers
             {
                 return NotFound();
             }
-
             var trabajador = await _context.Trabajador.FindAsync(id);
             if (trabajador == null)
             {

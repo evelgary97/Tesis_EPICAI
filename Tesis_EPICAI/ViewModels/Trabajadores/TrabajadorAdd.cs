@@ -31,7 +31,7 @@ namespace Tesis_EPICAI.ViewsModels
         [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
-        public Cargo Cargo { get; set; }
+        public int CargoId { get; set; }
 
         public List<SelectListItem> ListItems { get; set; }
     }

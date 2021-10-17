@@ -8,9 +8,9 @@ namespace Tesis_EPICAI.ViewModels.Usuarios
 {
     public class Login
     {
-        [Required]
+        [Required(ErrorMessage = "Por favor escriba su nombre de usuario")]
         public string Nombre { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Por favor escriba su contraseña")]
         public string Password { get; set; }
     }
 }
