@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tesis_EPICAI.ViewModels.Usuarios;
 
 namespace Tesis_EPICAI.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class UsuariosController : Controller
     {
         private readonly AppContext _appContext;
@@ -73,12 +72,13 @@ namespace Tesis_EPICAI.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(Login model)
         {
@@ -89,14 +89,14 @@ namespace Tesis_EPICAI.Controllers
                 {
                     if (await _userManager.CheckPasswordAsync(user, model.Password))
                     {
-                        await _signInManager.SignInAsync(user, true);
+                        await _signInManager.SignInAsync(user, false);
                         return RedirectToAction("Index", "Home");
                     }
                 }
             }
             return View();
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

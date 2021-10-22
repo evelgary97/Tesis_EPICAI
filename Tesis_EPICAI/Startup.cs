@@ -1,10 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace Tesis_EPICAI
 {
@@ -21,7 +23,10 @@ namespace Tesis_EPICAI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddMvc(x => x.EnableEndpointRouting = false);
+            services.AddMvc(x =>
+            {
+                x.EnableEndpointRouting = false;
+            });
 
             services.AddDbContext<AppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AppContext")));
@@ -35,7 +40,16 @@ namespace Tesis_EPICAI
                 x.Password.RequireUppercase = false;
                 x.Password.RequiredUniqueChars = 0;
             }).AddEntityFrameworkStores<AppContext>();
-
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
+            services.ConfigureApplicationCookie(x =>
+            {
+                x.LoginPath = "/Usuarios/Login";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +68,6 @@ namespace Tesis_EPICAI
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc(x => x.MapRoute("default", "{controller=Home}/{action=Index}/{id?}"));
-
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,8 +10,11 @@ using Tesis_EPICAI.Models;
 
 namespace Tesis_EPICAI.Controllers
 {
+    [Authorize]
     public class CargosController : Controller
     {
+        
+        
         private readonly AppContext _context;
 
         public CargosController(AppContext context)
