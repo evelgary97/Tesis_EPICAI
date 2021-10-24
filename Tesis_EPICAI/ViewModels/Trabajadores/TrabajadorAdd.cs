@@ -30,7 +30,7 @@ namespace Tesis_EPICAI.ViewsModels
         [Required(ErrorMessage = "Rellene el campo dirección")]
         [Display(Name = "Dirección")]
         public string Direccion { get; set; }
-
+        [Display(Name = "Cargo")]
         public int CargoId { get; set; }
 
         public List<SelectListItem> ListItems { get; set; }

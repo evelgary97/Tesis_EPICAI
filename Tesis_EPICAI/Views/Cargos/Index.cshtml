@@ -4,12 +4,12 @@
     ViewData["Title"] = "Cargos";
 }
 
-<h1>Index</h1>
+<h1>Cargos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Añadir nuevo</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -21,7 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -38,9 +38,9 @@
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
                 </td>
             </tr>
         }

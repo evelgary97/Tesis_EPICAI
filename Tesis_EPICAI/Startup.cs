@@ -49,6 +49,7 @@ namespace Tesis_EPICAI
             services.ConfigureApplicationCookie(x =>
             {
                 x.LoginPath = "/Usuarios/Login";
+                x.AccessDeniedPath = "/Home/AccesDenied";
             });
         }
 
